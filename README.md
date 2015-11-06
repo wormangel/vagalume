@@ -20,7 +20,7 @@ The usage is pretty simple:
 ```ruby
 require "vagalume"
 
-result = Vagalume.find("Metallica", "The Unforgiven")
+result = Vagalume.find(art: "Metallica", mus: "The Unforgiven")
 
 result.status # => Can be "exact", "aprox", "song_notfound" or "notfound"
 
@@ -37,6 +37,21 @@ artist.name
 artist.url
 
 result.translations.with_language(Vagalume::Language::PORTUGUESE) # return a Song object
+```
+Also supports the "nolyrics" and the "ytid" (youtube id) as an extra param:
+
+```ruby
+require "vagalume"
+
+result = Vagalume.find(art: "Metallica", mus: "The Unforgiven", nolyrics: true, ytid: true)
+
+result.status # => Can be "exact", "aprox", "song_notfound" or "notfound"
+
+song = result.song
+song.id
+song.lyric (nil)
+song.youtube_id 
+
 ```
 
 You can also use it from the command line:
