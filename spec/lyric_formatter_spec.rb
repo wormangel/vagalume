@@ -6,7 +6,7 @@ describe Vagalume::LyricFormatter do
   context "there is a translation available" do
     before do
       VCR.use_cassette('vagalume') do
-        @search = Vagalume.find("Metallica", "The Unforgiven")
+        @search = Vagalume.find(art: "Metallica", mus: "The Unforgiven")
       end
     end
 
@@ -28,7 +28,7 @@ describe Vagalume::LyricFormatter do
   context "there is no translation available" do
     it "informs that there is no translation available" do
       VCR.use_cassette('vagalume_with_no_translation_available') do
-        @search = Vagalume.find("Bruce Springsteen", "Ain't good enough for You")
+        @search = Vagalume.find(art: "Bruce Springsteen", mus: "Ain't good enough for You")
         options = {:translation => true}
         output = subject.format(@search, options)
         output.should == "No translation found"

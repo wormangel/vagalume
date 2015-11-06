@@ -6,7 +6,7 @@ describe Vagalume do
 
   before do
     VCR.use_cassette('vagalume') do
-      @result = Vagalume.find("Metallica", "The Unforgiven")
+      @result = Vagalume.find(art: "Metallica", mus: "The Unforgiven")
     end
   end
 
@@ -26,14 +26,14 @@ describe Vagalume do
 
   it "returns result with song not found status" do
     VCR.use_cassette('vagalume_song_not_found') do
-      result = Vagalume.find("Metallica", "Oops")
+      result = Vagalume.find(art: "Metallica", mus: "Oops")
       result.status.should == Vagalume::Status::SONG_NOT_FOUND
     end
   end
 
   it "returns result with not found status" do
     VCR.use_cassette('vagalume_not_found') do
-      result = Vagalume.find("Oops", "Oops")
+      result = Vagalume.find(art: "Oops", mus: "Oops")
       result.status.should == Vagalume::Status::NOT_FOUND
     end
   end

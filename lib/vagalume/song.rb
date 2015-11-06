@@ -1,6 +1,6 @@
 module Vagalume
   class Song
-    attr_accessor :id, :name, :language, :url, :lyric
+    attr_accessor :id, :name, :language, :url, :lyric, :youtube_id
 
     def initialize(song)
       @id = song["id"]
@@ -8,6 +8,7 @@ module Vagalume
       @url = song["url"]
       @lyric = song["text"]
       @name = song["name"]
+      @youtube_id = song["ytid"]
 
       if translation?
         @name = get_name_from_lyric(@lyric)
