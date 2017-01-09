@@ -1,5 +1,6 @@
 require "multi_json"
 require "open-uri"
+require "open_uri_redirections"
 require_relative "vagalume/core_ext/array"
 require_relative "vagalume/search_result"
 require_relative "vagalume/language"
@@ -12,7 +13,7 @@ require_relative "vagalume/validator"
 module Vagalume
   extend self
 
-  BASE_URL = "https://www.vagalume.com.br/api/search.php?"
+  BASE_URL = "http://www.vagalume.com.br/api/search.php?"
 
   # Search through the vagalume API
   # @param criteria [Hash]
@@ -22,7 +23,7 @@ module Vagalume
     validator = Vagalume::Validator.new
     criteria = validator.confirm(criteria)
     request_url = BASE_URL + to_query(criteria)
-    result = MultiJson.decode(open(request_url).read)
+    result = MultiJson.decode(open(request_url, :allow_redirections => :all).read)
     search_result = Vagalume::SearchResult.new(result)
   end
 
