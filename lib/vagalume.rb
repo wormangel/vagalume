@@ -12,7 +12,7 @@ require_relative "vagalume/validator"
 module Vagalume
   extend self
 
-  BASE_URL = "http://www.vagalume.com.br/api/search.php?"
+  BASE_URL = "https://www.vagalume.com.br/api/search.php?"
 
   # Search through the vagalume API
   # @param criteria [Hash]
